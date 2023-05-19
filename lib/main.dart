@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/config/firebase/firebase_options.dart';
+import 'package:momentry/providers/observer/provider_logger.dart';
 import 'package:momentry/screens/home_screen.dart';
 
 void main() async {
@@ -18,7 +20,15 @@ void main() async {
     // Firebase Crashlytics
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-    runApp(const MyApp());
+    runApp(
+      // Riverpod
+      ProviderScope(
+        observers: [
+          ProviderLogger(),
+        ],
+        child: const MyApp(),
+      ),
+    );
   }, (error, stack) {
     FirebaseCrashlytics.instance.recordError(error, stack);
   });
