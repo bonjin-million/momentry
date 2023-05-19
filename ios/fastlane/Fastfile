@@ -1,0 +1,16 @@
+
+default_platform(:ios)
+
+# Match 인증 함수
+# passphrase: Password1234!@#$
+# Password (for bonjin.app@gmail.com): Password1234!@#$
+# Password for login keychain: Password1234!@#$
+# Password: Password1234!@#$
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    increment_build_number(xcodeproj: "Runner.xcodeproj")
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+    upload_to_testflight
+  end
+end
