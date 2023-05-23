@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:momentry/screens/post/components/post_list_body.dart';
-import 'package:momentry/screens/post/post_screen.dart';
+import 'package:momentry/screens/post/list/components/post_list_body.dart';
+import 'package:momentry/screens/post/add/post_screen.dart';
 
 class PostListScreen extends StatelessWidget {
   const PostListScreen({Key? key}) : super(key: key);
