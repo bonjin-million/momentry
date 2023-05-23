@@ -10,6 +10,6 @@ class PostListBody extends StatefulWidget {
 class _PostListBodyState extends State<PostListBody> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(child: Text('일기 목록'));
   }
 }
