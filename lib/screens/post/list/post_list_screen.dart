@@ -19,6 +19,7 @@ class PostListScreen extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => PostAddScreen(),
+              fullscreenDialog: true,
             ),
           );
         },

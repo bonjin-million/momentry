@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/post/post.dart';
 import 'package:momentry/providers/post_provider.dart';
+import 'package:momentry/screens/post/detail/post_detail_screen.dart';
+import 'package:momentry/screens/post/list/components/post_list_item.dart';
 
 class PostListBody extends ConsumerStatefulWidget {
   const PostListBody({Key? key}) : super(key: key);
@@ -11,7 +13,6 @@ class PostListBody extends ConsumerStatefulWidget {
 }
 
 class _PostListBodyState extends ConsumerState<PostListBody> {
-
   @override
   void initState() {
     super.initState();
@@ -46,16 +47,22 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        return ListTile(
+        return PostListItem(
+          item: item,
           leading: Text('ID: ${item.id}'),
-          title: Text(item.title),
-          subtitle: Text(item.content),
           trailing: IconButton(
             onPressed: () {
               ref.read(postProvider.notifier).delete(item.id);
             },
             icon: const Icon(Icons.delete),
           ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PostDetailScreen(),
+              ),
+            );
+          },
         );
       },
     );
