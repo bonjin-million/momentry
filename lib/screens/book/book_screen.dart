@@ -9,6 +9,7 @@ class BookScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('책'),
+        centerTitle: false,
       ),
       body: BookBody(),
     );
