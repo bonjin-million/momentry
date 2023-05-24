@@ -8,6 +8,7 @@ import 'package:momentry/config/firebase/firebase_options.dart';
 import 'package:momentry/providers/observer/provider_logger.dart';
 import 'package:momentry/providers/theme_provider.dart';
 import 'package:momentry/screens/home_screen.dart';
+import 'package:momentry/theme/color_schemes.dart';
 
 void main() async {
   await runZonedGuarded(() async {
@@ -45,12 +46,8 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Momentry',
       themeMode: themeMode,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       home: const HomeScreen(),
     );
   }
