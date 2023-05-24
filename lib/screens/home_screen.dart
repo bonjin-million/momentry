@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:momentry/screens/book/book_screen.dart';
 import 'package:momentry/screens/post/list/post_list_screen.dart';
+import 'package:momentry/screens/setting/setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: const Text('영화'),
         ),
         BookScreen(),
+        SettingScreen(),
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
@@ -43,6 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
           NavigationDestination(
             icon: Icon(Icons.book_outlined),
             label: '책',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings_outlined),
+            label: '설정',
           ),
         ],
       ),
