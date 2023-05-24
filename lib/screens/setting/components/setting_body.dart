@@ -29,7 +29,6 @@ class _SettingBodyState extends ConsumerState<SettingBody> {
                   value: ThemeMode.system,
                   groupValue: ref.watch(themeProvider),
                   onChanged: ref.read(themeProvider.notifier).setMode,
-                  activeColor: Theme.of(context).primaryColor,
                 ),
               ),
             ),

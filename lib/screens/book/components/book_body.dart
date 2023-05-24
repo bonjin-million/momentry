@@ -42,15 +42,12 @@ class _BookBodyState extends ConsumerState<BookBody> {
 
     final data = state.value;
 
-    return ListView.separated(
+    return ListView.builder(
       itemBuilder: (context, index) {
         final item = data.items[index];
         return BookItem(
           item: item,
         );
-      },
-      separatorBuilder: (context, index) {
-        return const Divider();
       },
       itemCount: data.items.length,
     );
