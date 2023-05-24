@@ -52,9 +52,9 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
           subtitle: Text(item.content),
           trailing: IconButton(
             onPressed: () {
-
+              ref.read(postProvider.notifier).delete(item.id);
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
           ),
         );
       },

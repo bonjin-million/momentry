@@ -10,4 +10,8 @@ class PostRepository {
   Future<void> add(Map<String, dynamic> post) async {
     await PostDatabase().insert(post);
   }
+
+  Future<void> delete(int id) async {
+    await PostDatabase().delete(id);
+  }
 }

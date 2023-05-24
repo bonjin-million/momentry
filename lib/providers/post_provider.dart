@@ -23,4 +23,9 @@ class PostStateNotifier extends StateNotifier<AsyncValue<List<Post>>> {
     await repository.add(post);
     findAll();
   }
+
+  Future<void> delete(int id) async {
+    await repository.delete(id);
+    findAll();
+  }
 }
