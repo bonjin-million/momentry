@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios distribute
 ```
 
-Push a new beta build to TestFlight
+build app and release to Firebase Distribution
 
 ### ios download_udids
 
