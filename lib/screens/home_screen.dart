@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:momentry/screens/book/book_screen.dart';
+import 'package:momentry/screens/book/list/book_list_screen.dart';
 import 'package:momentry/screens/post/list/post_list_screen.dart';
 import 'package:momentry/screens/setting/setting_screen.dart';
 
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.center,
           child: const Text('영화'),
         ),
-        BookScreen(),
+        BookListScreen(),
         SettingScreen(),
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(

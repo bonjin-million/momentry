@@ -6,9 +6,11 @@ import 'dart:core';
 import 'package:momentry/models/book/book_response.dart';
 
 class BookRepository {
-
-  Future<BookResponse> fetchItems() async {
-    final uri = Uri.parse('https://openapi.naver.com/v1/search/book.json?query=love&display=10&start=1');
+  Future<BookResponse> fetchItems({
+    required String keyword,
+  }) async {
+    final uri = Uri.parse(
+        'https://openapi.naver.com/v1/search/book.json?query=$keyword&display=10&start=1');
 
     // HTTP 요청 헤더에 액세스 키 포함
     final Map<String, String> headers = {
