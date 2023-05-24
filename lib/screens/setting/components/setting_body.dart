@@ -14,7 +14,7 @@ class _SettingBodyState extends ConsumerState<SettingBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           SettingGroup(title: '테마', icon: Icons.settings_display, children: [

@@ -43,6 +43,7 @@ class _BookBodyState extends ConsumerState<BookBody> {
     final data = state.value;
 
     return ListView.builder(
+      padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) {
         final item = data.items[index];
         return BookItem(

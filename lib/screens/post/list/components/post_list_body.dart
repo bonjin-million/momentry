@@ -44,6 +44,7 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
 
     final items = state.value;
     return ListView.builder(
+      padding: const EdgeInsets.all(16),
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
