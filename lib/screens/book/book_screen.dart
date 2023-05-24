@@ -8,7 +8,7 @@ class BookScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('도서 정보'),
+        title: const Text('책'),
       ),
       body: BookBody(),
     );

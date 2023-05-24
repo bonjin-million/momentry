@@ -9,7 +9,7 @@ class PostListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('POST'),
+        title: const Text('일기'),
       ),
       body: PostListBody(),
       floatingActionButton: FloatingActionButton(
