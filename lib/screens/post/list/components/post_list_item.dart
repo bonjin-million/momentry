@@ -10,12 +10,14 @@ class PostListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: leading,
-      title: Text(item.title),
-      subtitle: Text(item.content),
-      trailing: trailing,
-      onTap: onTap,
+    return Card(
+      child: ListTile(
+        leading: leading,
+        title: Text(item.title),
+        subtitle: Text(item.content),
+        trailing: trailing,
+        onTap: onTap,
+      ),
     );
   }
 }
