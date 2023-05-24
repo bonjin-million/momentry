@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:momentry/screens/post/list/components/post_list_body.dart';
-import 'package:momentry/screens/post/add/post_screen.dart';
+import 'package:momentry/screens/post/add/post_add_screen.dart';
 
 class PostListScreen extends StatelessWidget {
   const PostListScreen({Key? key}) : super(key: key);
@@ -15,9 +15,13 @@ class PostListScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PostScreen()));
+            context,
+            MaterialPageRoute(
+              builder: (context) => PostAddScreen(),
+            ),
+          );
         },
-        child: Icon(Icons.add_circle_outline_sharp),
+        child: const Icon(Icons.add_circle_outline_sharp),
       ),
     );
   }

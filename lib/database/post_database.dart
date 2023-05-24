@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:momentry/models/post.dart';
+import 'package:momentry/models/post/post.dart';
 
 class PostDatabase {
   final _databaseName = 'momentry_database.db';
@@ -20,7 +20,7 @@ class PostDatabase {
       onCreate: (db, version) {
         return db.execute('''
           CREATE TABLE $_databaseTableName(
-            id INTEGER PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
             content TEXT
           )
@@ -38,7 +38,7 @@ class PostDatabase {
     }).toList();
   }
 
-  Future<void> insert(Post post) async {
+  Future<void> insert(Map<String, dynamic> map) async {
     final db = await database;
     // late Post insertPost;
     // await db.transaction((txn) async {
@@ -52,7 +52,7 @@ class PostDatabase {
     // });
     await db.insert(
       _databaseTableName,
-      post.toJson(),
+      map,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
@@ -60,7 +60,7 @@ class PostDatabase {
   Future<void> update(Post post) async {
     final db = await database;
     final id = post.id;
-    await db.update(_databaseTableName, post.toJson(), where: 'id = ?', whereArgs: [id]);
+    await db.update(_databaseTableName, post.toMap(), where: 'id = ?', whereArgs: [id]);
   }
 
   Future<void> delete(int id) async {
