@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momentry/providers/movie_provider.dart';
 import 'package:momentry/screens/movie/search/components/movie_search_body.dart';
 
 class MovieSearchScreen extends ConsumerStatefulWidget {
@@ -40,6 +41,7 @@ class _MovieSearchScreenState extends ConsumerState<MovieSearchScreen> {
           autofocus: true,
           onSubmitted: (value) {
             if(value.isNotEmpty) {
+              ref.read(movieProvider.notifier).fetchItems(keyword: value);
             }
           },
         ),

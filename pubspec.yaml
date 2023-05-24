@@ -39,6 +39,9 @@ dependencies:
   http: ^0.13.6
   path: ^1.8.3
 
+  # tools.dart.dev
+  html: ^0.15.2
+
   # firebase
   firebase_core: ^2.13.0
   firebase_messaging: ^14.6.1
@@ -79,6 +82,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
