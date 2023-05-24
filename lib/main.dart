@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/config/firebase/firebase_options.dart';
 import 'package:momentry/providers/observer/provider_logger.dart';
+import 'package:momentry/providers/theme_provider.dart';
 import 'package:momentry/screens/home_screen.dart';
 
 void main() async {
@@ -34,16 +35,20 @@ void main() async {
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+
     return MaterialApp(
-      title: '모멘터리',
+      title: 'Momentry',
+      themeMode: themeMode,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData(
         useMaterial3: true,
       ),
       home: const HomeScreen(),

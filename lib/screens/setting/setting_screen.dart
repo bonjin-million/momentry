@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momentry/screens/setting/components/setting_body.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class SettingScreen extends StatelessWidget {
         centerTitle: false,
         title: const Text('설정'),
       ),
+      body: SettingBody(),
     );
   }
 }
