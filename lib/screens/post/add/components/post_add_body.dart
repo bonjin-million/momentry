@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:momentry/models/post/post_add_request.dart';
 import 'package:momentry/providers/post_provider.dart';
 
@@ -12,9 +13,16 @@ class PostAddBody extends ConsumerStatefulWidget {
 
 class _PostAddBodyState extends ConsumerState<PostAddBody> {
   final _formKey = GlobalKey<FormState>();
-
+  TextEditingController dateController = TextEditingController();
   String title = '';
   String content = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    dateController.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  }
 
   void add() async {
     final formKeyState = _formKey.currentState!;
@@ -36,9 +44,27 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
         key: _formKey,
         child: Column(
           children: [
-            Text(
-              '2023.05.23',
-              style: const TextStyle(fontSize: 17),
+            TextFormField(
+              controller: dateController,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.calendar_today),
+                labelText: "언제?",
+              ),
+              readOnly: true,
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime.now());
+
+                if (pickedDate != null) {
+                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                  setState(() {
+                    dateController.text = formattedDate;
+                  });
+                }
+              },
             ),
             Expanded(
               child: SizedBox(
@@ -53,11 +79,12 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
                     return null;
                   },
                   onSaved: (value) {
-                    if(value != null) {
+                    if (value != null) {
                       content = value;
                     }
                   },
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.note_outlined),
                     hintText: '일기 작성하는 곳',
                     border: InputBorder.none,
                   ),
