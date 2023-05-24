@@ -16,6 +16,7 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
   TextEditingController dateController = TextEditingController();
   String title = '';
   String content = '';
+  String date = '';
 
   @override
   void initState() {
@@ -29,7 +30,8 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
     if (formKeyState.validate()) {
       formKeyState.save();
 
-      final newPost = PostAddRequest(title: title, content: content);
+      final newPost = PostAddRequest(
+          title: title, content: content, date: dateController.text);
       ref.read(postProvider.notifier).add(newPost.toMap()).then((value) {
         Navigator.pop(context);
       });
@@ -59,9 +61,11 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
                     lastDate: DateTime.now());
 
                 if (pickedDate != null) {
-                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                  String formattedDate =
+                      DateFormat('yyyy-MM-dd').format(pickedDate);
                   setState(() {
                     dateController.text = formattedDate;
+                    date = formattedDate;
                   });
                 }
               },
@@ -79,6 +83,7 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
                     return null;
                   },
                   onSaved: (value) {
+                    print(value);
                     if (value != null) {
                       content = value;
                     }

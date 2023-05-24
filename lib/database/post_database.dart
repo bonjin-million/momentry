@@ -22,7 +22,8 @@ class PostDatabase {
           CREATE TABLE $_databaseTableName(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
-            content TEXT
+            content TEXT,
+            date TEXT
           )
         ''');
       },
@@ -60,7 +61,8 @@ class PostDatabase {
   Future<void> update(Post post) async {
     final db = await database;
     final id = post.id;
-    await db.update(_databaseTableName, post.toMap(), where: 'id = ?', whereArgs: [id]);
+    await db.update(_databaseTableName, post.toMap(),
+        where: 'id = ?', whereArgs: [id]);
   }
 
   Future<void> delete(int id) async {
