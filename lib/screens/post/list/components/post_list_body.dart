@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/post/post.dart';
-import 'package:momentry/providers/post_provider.dart';
+import 'package:momentry/providers/post/post_list_provider.dart';
 import 'package:momentry/screens/post/detail/post_detail_screen.dart';
 import 'package:momentry/screens/post/list/components/post_list_item.dart';
 
@@ -21,13 +20,13 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(postProvider.notifier).findAll();
+      ref.read(postListProvider.notifier).findAll();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(postProvider);
+    final state = ref.watch(postListProvider);
 
     final isData = state is AsyncData<List<Post>>;
     final isLoading = state is AsyncLoading;
@@ -59,14 +58,14 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
           ),
           trailing: IconButton(
             onPressed: () {
-              ref.read(postProvider.notifier).delete(item.id);
+              ref.read(postListProvider.notifier).delete(item.id);
             },
             icon: const Icon(Icons.delete),
           ),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => PostDetailScreen(),
+                builder: (context) => PostDetailScreen(id: item.id,),
               ),
             );
           },

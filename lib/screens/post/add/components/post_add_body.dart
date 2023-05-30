@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:momentry/models/post/post_add_request.dart';
-import 'package:momentry/providers/post_provider.dart';
+import 'package:momentry/providers/post/post_list_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -64,7 +64,7 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
         date: dateController.text,
         imageFile: imagePath,
       );
-      ref.read(postProvider.notifier).add(newPost.toMap()).then((value) {
+      ref.read(postListProvider.notifier).add(newPost.toMap()).then((value) {
         Navigator.pop(context);
       });
     }
