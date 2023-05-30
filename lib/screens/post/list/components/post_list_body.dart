@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/post/post.dart';
@@ -48,9 +51,12 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
+
         return PostListItem(
           item: item,
-          leading: Text('ID: ${item.id}'),
+          leading: Image.memory(
+            base64Decode(item.imageFile),
+          ),
           trailing: IconButton(
             onPressed: () {
               ref.read(postProvider.notifier).delete(item.id);

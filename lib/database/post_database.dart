@@ -23,6 +23,7 @@ class PostDatabase {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
             content TEXT,
+            imageFile TEXT,
             date TEXT
           )
         ''');
