@@ -53,8 +53,11 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
 
         return PostListItem(
           item: item,
-          leading: Image.memory(
-            base64Decode(item.imageFile),
+          leading: Visibility(
+            visible: item.imageFile.isNotEmpty,
+            child: Image.memory(
+              base64Decode(item.imageFile),
+            ),
           ),
           trailing: IconButton(
             onPressed: () {
