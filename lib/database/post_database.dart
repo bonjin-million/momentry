@@ -40,6 +40,18 @@ class PostDatabase {
     }).toList();
   }
 
+  Future<Post> findById(int id) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      _databaseTableName,
+      where: 'id = ?',
+      whereArgs: [id],
+      limit: 1,
+    );
+
+    return Post.fromJson(maps.first);
+  }
+
   Future<void> insert(Map<String, dynamic> map) async {
     final db = await database;
     // late Post insertPost;

@@ -12,6 +12,7 @@ class PostListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       child: ListTile(
         leading: leading,
