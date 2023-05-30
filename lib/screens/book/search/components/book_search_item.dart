@@ -14,7 +14,7 @@ class BookSearchItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => BookAddScreen(),
+            builder: (context) => BookAddScreen(book: (item)),
             fullscreenDialog: true,
           ),
         )
