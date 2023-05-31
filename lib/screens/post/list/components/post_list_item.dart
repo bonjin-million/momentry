@@ -20,6 +20,19 @@ class PostListItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  item.date,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
               Visibility(
                 visible: item.imageFile.isNotEmpty,
                 child: ClipRRect(
@@ -36,18 +49,6 @@ class PostListItem extends StatelessWidget {
                 item.content,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  item.date,
-                  style: const TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
               ),
             ],
           ),
