@@ -15,7 +15,7 @@ class _BookAddScreenState extends State<BookAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('책 후기 작성'),
+        title: const Text('책 후기 작성'),
       ),
       body: BookAddBody(book: (widget.book)),
     );
