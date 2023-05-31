@@ -55,7 +55,7 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
             children: [
               Image.asset(
                 'assets/images/panic.png',
-                width: MediaQuery.of(context).size.width / 4,
+                width: MediaQuery.of(context).size.width * 0.2,
               ),
               const SizedBox(height: 24,),
               const Text('등록된 일기가 없어요'),
