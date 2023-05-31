@@ -147,11 +147,11 @@ class _BookAddBodyState extends State<BookAddBody> {
                 ),
                 Expanded(
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: TextField(
                       maxLines: null,
-                      style: TextStyle(decorationThickness: 0),
-                      decoration: InputDecoration(
+                      style: const TextStyle(decorationThickness: 0),
+                      decoration: const InputDecoration(
                         hintText: '후기를 작성해주세요.',
                         border: InputBorder.none,
                       ),
