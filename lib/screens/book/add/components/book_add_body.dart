@@ -12,13 +12,7 @@ class BookAddBody extends StatefulWidget {
 }
 
 class _BookAddBodyState extends State<BookAddBody> {
-  List<bool> stars = [
-    true,
-    true,
-    true,
-    true,
-    true,
-  ];
+  List<bool> stars = List.generate(5, (index) => true);
 
   @override
   void initState() {
