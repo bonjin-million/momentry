@@ -47,8 +47,21 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
     final items = state.value;
 
     if (items.isEmpty) {
-      return const Center(
-        child: Text('등록된 일기가 없어요'),
+      return Center(
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/panic.png',
+                width: MediaQuery.of(context).size.width / 4,
+              ),
+              const SizedBox(height: 24,),
+              const Text('등록된 일기가 없어요'),
+            ],
+          ),
+        ),
       );
     }
 
