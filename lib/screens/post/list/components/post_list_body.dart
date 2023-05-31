@@ -53,18 +53,6 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
 
         return PostListItem(
           item: item,
-          leading: Visibility(
-            visible: item.imageFile.isNotEmpty,
-            child: Image.memory(
-              base64Decode(item.imageFile),
-            ),
-          ),
-          trailing: IconButton(
-            onPressed: () {
-              ref.read(postListProvider.notifier).delete(item.id);
-            },
-            icon: const Icon(Icons.delete),
-          ),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
