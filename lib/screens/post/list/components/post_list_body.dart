@@ -45,6 +45,13 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
     }
 
     final items = state.value;
+
+    if (items.isEmpty) {
+      return const Center(
+        child: Text('등록된 일기가 없어요'),
+      );
+    }
+
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: items.length,
@@ -56,7 +63,9 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => PostDetailScreen(id: item.id,),
+                builder: (context) => PostDetailScreen(
+                  id: item.id,
+                ),
               ),
             );
           },

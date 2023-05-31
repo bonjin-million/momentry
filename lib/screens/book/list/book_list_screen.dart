@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momentry/screens/book/list/components/book_list_body.dart';
 import 'package:momentry/screens/book/search/book_search_screen.dart';
 
 class BookListScreen extends StatelessWidget {
@@ -16,6 +17,7 @@ class BookListScreen extends StatelessWidget {
           }, icon: const Icon(Icons.add),),
         ],
       ),
+      body: BookListBody(),
     );
   }
 }
