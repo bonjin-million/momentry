@@ -12,7 +12,7 @@ class BookAddBody extends StatefulWidget {
 }
 
 class _BookAddBodyState extends State<BookAddBody> {
-  List<bool> stars = List.generate(5, (index) => true);
+  List<bool> stars = List.generate(5, (index) => index < 3);
 
   @override
   void initState() {
@@ -123,7 +123,7 @@ class _BookAddBodyState extends State<BookAddBody> {
                           onTap: () {
                             var newStars = [...stars.map((e) => false)];
 
-                            for (int i = 0; i <= index; i++ ) {
+                            for (int i = 0; i <= index; i++) {
                               newStars[i] = true;
                             }
                             setState(() {
@@ -131,8 +131,8 @@ class _BookAddBodyState extends State<BookAddBody> {
                             });
                           },
                           child: Icon(
-                            Icons.star,
-                            color: value ? Colors.green[500] : Colors.black,
+                            value ? Icons.star : Icons.star_border_outlined,
+                            color: value ? Colors.green[500] : Colors.grey,
                           ),
                         );
                       },
