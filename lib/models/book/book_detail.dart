@@ -1,0 +1,41 @@
+class BookDetail {
+  final int id;
+  final String title;
+  final String image;
+  final int star;
+  final String author;
+  final String publisher;
+  final String content;
+  final String date;
+
+  BookDetail(
+      {required this.id,
+      required this.title,
+      required this.image,
+      required this.star,
+      required this.author,
+      required this.publisher,
+      required this.content,
+      required this.date});
+
+  BookDetail.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        title = json['title'],
+        content = json['content'],
+        date = json['date'],
+        publisher = json['publisher'],
+        author = json['author'],
+        star = json['star'],
+        image = json['image'];
+
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'title': title,
+        'image': image,
+        'star': star,
+        'author': author,
+        'publisher': publisher,
+        'content': content,
+        'date': date,
+      };
+}

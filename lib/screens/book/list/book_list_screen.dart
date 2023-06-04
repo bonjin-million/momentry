@@ -12,12 +12,19 @@ class BookListScreen extends StatelessWidget {
         centerTitle: false,
         title: const Text('책'),
         actions: [
-          IconButton(onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => BookSearchScreen(),),);
-          }, icon: const Icon(Icons.add),),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BookSearchScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
-      body: BookListBody(),
+      body: const BookListBody(),
     );
   }
 }
