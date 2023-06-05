@@ -5,7 +5,6 @@ import 'package:momentry/models/book/book.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/book/book_add_request.dart';
 import 'package:momentry/providers/book/book_list_provider.dart';
-import 'package:momentry/screens/book/list/book_list_screen.dart';
 
 class BookAddBody extends ConsumerStatefulWidget {
   final Book book;
@@ -51,11 +50,7 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
           .read(bookListProvider.notifier)
           .add(newBookPost.toMap())
           .then((value) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => BookListScreen(),
-          ),
-        );
+        Navigator.popUntil(context, (route) => route.isFirst);
       });
     }
   }
