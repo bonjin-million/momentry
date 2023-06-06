@@ -44,3 +44,5 @@ app.*.map.json
 /android/app/release
 /ios/Runner.app.dSYM.zip
 /ios/Runner.ipa
+/ios/tester_udids.txt
+/ios/fastlane/report.xml
