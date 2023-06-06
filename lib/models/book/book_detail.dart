@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 class BookDetail {
   final int id;
   final String title;
   final String image;
-  final int star;
+  final List<dynamic> stars;
   final String author;
   final String publisher;
   final String content;
@@ -12,7 +14,7 @@ class BookDetail {
       {required this.id,
       required this.title,
       required this.image,
-      required this.star,
+      required this.stars,
       required this.author,
       required this.publisher,
       required this.content,
@@ -25,14 +27,14 @@ class BookDetail {
         date = json['date'],
         publisher = json['publisher'],
         author = json['author'],
-        star = json['star'],
+        stars = jsonDecode(json['stars']),
         image = json['image'];
 
   Map<String, dynamic> toMap() => {
         'id': id,
         'title': title,
         'image': image,
-        'star': star,
+        'stars': stars,
         'author': author,
         'publisher': publisher,
         'content': content,

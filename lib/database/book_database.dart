@@ -1,5 +1,4 @@
 import 'package:momentry/database/sql_database.dart';
-import 'package:momentry/models/book/book.dart';
 import 'package:momentry/models/book/book_detail.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -14,7 +13,7 @@ class BookDatabase {
     }).toList();
   }
 
-  Future<Book> findById(int id) async {
+  Future<BookDetail> findById(int id) async {
     final db = await SqlDatabase.instance.database;
     final List<Map<String, dynamic>> maps = await db.query(
       'book',
@@ -22,7 +21,7 @@ class BookDatabase {
       whereArgs: [id],
       limit: 1,
     );
-    return Book.fromJson(maps.first);
+    return BookDetail.fromJson(maps.first);
   }
 
   Future<void> insert(Map<String, dynamic> map) async {

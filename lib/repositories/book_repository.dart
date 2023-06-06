@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:momentry/database/book_database.dart';
-import 'package:momentry/models/book/book.dart';
 import 'package:momentry/models/book/book_detail.dart';
 import 'dart:core';
 
@@ -31,7 +30,7 @@ class BookRepository {
     return response;
   }
 
-  Future<Book> fetchItem(int id) async {
+  Future<BookDetail> fetchDetailItem(int id) async {
     final response = await BookDatabase().findById(id);
     return response;
   }
