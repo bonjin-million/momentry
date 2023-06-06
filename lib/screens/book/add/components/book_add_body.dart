@@ -18,7 +18,6 @@ class BookAddBody extends ConsumerStatefulWidget {
 class _BookAddBodyState extends ConsumerState<BookAddBody> {
   final _bookKey = GlobalKey<FormState>();
   List<bool> stars = List.generate(5, (index) => index < 3);
-  int star = 3;
   String content = '';
   String date = '';
 
@@ -39,7 +38,7 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
       final newBookPost = BookAddRequest(
         title: widget.book.title,
         image: widget.book.image,
-        star: star,
+        stars: stars,
         author: widget.book.author,
         publisher: widget.book.publisher,
         content: content,
@@ -173,7 +172,6 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                                     }
 
                                     setState(() {
-                                      star = index + 1;
                                       stars = newStars;
                                     });
                                   },
@@ -181,8 +179,7 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                                     value
                                         ? Icons.star
                                         : Icons.star_border_outlined,
-                                    color:
-                                        value ? Colors.green[500] : Colors.grey,
+                                    color: value ? Colors.amber : Colors.grey,
                                   ),
                                 );
                               },
@@ -193,6 +190,12 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: TextFormField(
+                          onSaved: (value) {
+                            print(value);
+                            if (value != null) {
+                              content = value;
+                            }
+                          },
                           autofocus: true,
                           maxLines: null,
                           style: const TextStyle(decorationThickness: 0),

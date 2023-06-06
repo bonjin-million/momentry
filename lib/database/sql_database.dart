@@ -40,7 +40,7 @@ class SqlDatabase {
                 image TEXT,
                 publisher TEXT,
                 author TEXT,
-                star INTEGER,
+                stars TEXT,
                 date TEXT
               )
         ''';

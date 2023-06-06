@@ -35,14 +35,30 @@ class BookListItem extends StatelessWidget {
               ),
               Text(
                 item.title,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
                 ),
               ),
-              Text('★${item.star}'),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: item.stars.asMap().entries.map(
+                    (e) {
+                      bool value = e.value;
+
+                      return Icon(
+                        value ? Icons.star : Icons.star_border_outlined,
+                        color: value ? Colors.amber : Colors.grey,
+                        size: 15,
+                      );
+                    },
+                  ).toList(),
+                ),
+              ),
             ],
           ),
         ),

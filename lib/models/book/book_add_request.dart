@@ -1,7 +1,7 @@
 class BookAddRequest {
   final String title;
   final String image;
-  final int star;
+  final List<dynamic> stars;
   final String author;
   final String publisher;
   final String content;
@@ -10,7 +10,7 @@ class BookAddRequest {
   BookAddRequest(
       {required this.title,
       required this.image,
-      required this.star,
+      required this.stars,
       required this.author,
       required this.publisher,
       required this.content,
@@ -22,13 +22,13 @@ class BookAddRequest {
         date = json['date'],
         publisher = json['publisher'],
         author = json['author'],
-        star = json['star'],
+        stars = json['stars'],
         image = json['image'];
 
   Map<String, dynamic> toMap() => {
         'title': title,
         'image': image,
-        'star': star,
+        'stars': stars.toString(),
         'author': author,
         'publisher': publisher,
         'content': content,

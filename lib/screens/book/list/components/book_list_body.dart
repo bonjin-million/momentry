@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:momentry/models/book/book_detail.dart';
 import 'package:momentry/providers/book/book_list_provider.dart';
+import 'package:momentry/screens/book/detail/book_detail_screen.dart';
 import 'package:momentry/screens/book/list/components/book_list_item.dart';
 
 class BookListBody extends ConsumerStatefulWidget {
@@ -64,11 +65,6 @@ class _BookListBodyState extends ConsumerState<BookListBody> {
       );
     }
 
-    // return BookListItem(
-    //   item: item,
-    //   onTap: () {},
-    // );
-
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -82,7 +78,19 @@ class _BookListBodyState extends ConsumerState<BookListBody> {
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items[index];
-              return BookListItem(item: item);
+
+              return BookListItem(
+                item: item,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => BookDetailScreen(
+                        id: item.id,
+                      ),
+                    ),
+                  );
+                },
+              );
             }),
       ),
     );
