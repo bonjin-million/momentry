@@ -155,7 +155,7 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
