@@ -47,5 +47,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>프로필이나 게시물에 필요한 사진을 촬영하는데 사용됩니다</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>프로필이나 게시물에 사진을 업로드하는데 사용됩니다</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>개인에게 최적화된 광고를 제공하기 위해 사용자의 광고 활동 정보를 수집하며, 허용하지 않아도 서비스를 이용할 수 있습니다</string>
 </dict>
 </plist>

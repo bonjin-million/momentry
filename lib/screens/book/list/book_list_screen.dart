@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momentry/screens/book/list/components/book_list_body.dart';
 import 'package:momentry/screens/book/search/book_search_screen.dart';
 
 class BookListScreen extends StatelessWidget {
@@ -11,11 +12,19 @@ class BookListScreen extends StatelessWidget {
         centerTitle: false,
         title: const Text('책'),
         actions: [
-          IconButton(onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => BookSearchScreen(),),);
-          }, icon: const Icon(Icons.add),),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BookSearchScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
+      body: const BookListBody(),
     );
   }
 }

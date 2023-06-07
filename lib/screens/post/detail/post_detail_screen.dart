@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:momentry/screens/post/detail/components/post_detail_body.dart';
 
 class PostDetailScreen extends StatelessWidget {
-  const PostDetailScreen({Key? key}) : super(key: key);
+  final int id;
+
+  const PostDetailScreen({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +15,7 @@ class PostDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(''),
       ),
+      body: PostDetailBody(id: id,),
     );
   }
 }
