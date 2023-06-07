@@ -7,6 +7,11 @@ class PostRepository {
     return response;
   }
 
+  Future<Post> fetchItem(int id) async {
+    final response = await PostDatabase().findById(id);
+    return response;
+  }
+
   Future<void> add(Map<String, dynamic> post) async {
     await PostDatabase().insert(post);
   }
