@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:momentry/database/book_database.dart';
-import 'package:momentry/models/book/book_detail.dart';
 import 'dart:core';
 
 import 'package:momentry/models/book/book_response.dart';
@@ -23,19 +21,5 @@ class BookRepository {
     final response = await http.get(uri, headers: headers);
     print(response.body);
     return BookResponse.fromJson(jsonDecode(response.body));
-  }
-
-  Future<List<BookDetail>> fetchList() async {
-    final response = await BookDatabase().findAll();
-    return response;
-  }
-
-  Future<BookDetail> fetchDetailItem(int id) async {
-    final response = await BookDatabase().findById(id);
-    return response;
-  }
-
-  Future<void> add(Map<String, dynamic> bookAddRequest) async {
-    await BookDatabase().insert(bookAddRequest);
   }
 }

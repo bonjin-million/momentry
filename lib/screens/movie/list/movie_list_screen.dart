@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:momentry/screens/movie/list/components/movie_list_body.dart';
 import 'package:momentry/screens/movie/search/movie_search_screen.dart';
 
 class MovieListScreen extends StatelessWidget {
@@ -17,7 +16,6 @@ class MovieListScreen extends StatelessWidget {
           }, icon: const Icon(Icons.add),),
         ],
       ),
-      body: MovieListBody(),
     );
   }
 }
