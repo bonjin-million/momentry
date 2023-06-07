@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/post/post.dart';
-import 'package:momentry/providers/post/post_list_provider.dart';
+import 'package:momentry/providers/post_provider.dart';
 import 'package:momentry/screens/post/detail/post_detail_screen.dart';
 import 'package:momentry/screens/post/list/components/post_list_item.dart';
 
@@ -20,13 +18,13 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(postListProvider.notifier).findAll();
+      ref.read(postProvider.notifier).findAll();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(postListProvider);
+    final state = ref.watch(postProvider);
 
     final isData = state is AsyncData<List<Post>>;
     final isLoading = state is AsyncLoading;
@@ -45,40 +43,24 @@ class _PostListBodyState extends ConsumerState<PostListBody> {
     }
 
     final items = state.value;
-
-    if (items.isEmpty) {
-      return Center(
-        child: Align(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                'assets/images/panic.png',
-                width: MediaQuery.of(context).size.width * 0.2,
-              ),
-              const SizedBox(height: 24,),
-              const Text('등록된 일기가 없어요'),
-            ],
-          ),
-        ),
-      );
-    }
-
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-
         return PostListItem(
           item: item,
+          leading: Text('ID: ${item.id}'),
+          trailing: IconButton(
+            onPressed: () {
+              ref.read(postProvider.notifier).delete(item.id);
+            },
+            icon: const Icon(Icons.delete),
+          ),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => PostDetailScreen(
-                  id: item.id,
-                ),
+                builder: (context) => PostDetailScreen(),
               ),
             );
           },

@@ -2,15 +2,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/post/post.dart';
 import 'package:momentry/repositories/post_repository.dart';
 
-final postListProvider = StateNotifierProvider((ref) {
+final postProvider = StateNotifierProvider((ref) {
   final repository = PostRepository();
-  return PostListStateNotifier(repository: repository);
+  return PostStateNotifier(repository: repository);
 });
 
-class PostListStateNotifier extends StateNotifier<AsyncValue<List<Post>>> {
+class PostStateNotifier extends StateNotifier<AsyncValue<List<Post>>> {
   final PostRepository repository;
 
-  PostListStateNotifier({
+  PostStateNotifier({
     required this.repository,
   }) : super(const AsyncValue.loading());
 
