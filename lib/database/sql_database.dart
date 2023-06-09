@@ -45,6 +45,19 @@ class SqlDatabase {
               )
         ''';
 
+  final _movieTable = '''
+          CREATE TABLE movie(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT,
+          content TEXT,
+          image TEXT,
+          publisher TEXT,
+          author TEXT,
+          stars TEXT,
+          date TEXT
+        )
+  ''';
+
   Future<void> _init() async {
     _database = await openDatabase(
       join(await getDatabasesPath(), _databaseName),
@@ -52,6 +65,7 @@ class SqlDatabase {
       onCreate: (db, version) async {
         await db.execute(_postTable);
         await db.execute(_bookTable);
+        await db.execute(_movieTable);
       },
     );
   }

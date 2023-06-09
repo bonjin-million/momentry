@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:momentry/models/book/book.dart';
-import 'package:momentry/screens/book/add/book_add_screen.dart';
 
 class BookSearchItem extends StatelessWidget {
   final Book item;
+  final GestureTapCallback? onTap;
 
-  const BookSearchItem({Key? key, required this.item}) : super(key: key);
+  const BookSearchItem({Key? key, required this.item, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BookAddScreen(book: (item)),
-            fullscreenDialog: true,
-          ),
-        )
-      },
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

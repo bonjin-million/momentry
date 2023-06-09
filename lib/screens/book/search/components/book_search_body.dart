@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/book/book_response.dart';
 import 'package:momentry/providers/book_provider.dart';
+import 'package:momentry/screens/book/add/book_add_screen.dart';
 import 'package:momentry/screens/book/search/components/book_search_item.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -42,6 +43,15 @@ class BookSearchBody extends ConsumerWidget {
             final item = data.items[index];
             return BookSearchItem(
               item: item,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookAddScreen(item: item),
+                    fullscreenDialog: true,
+                  ),
+                );
+              },
             );
           },
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:momentry/models/movie/movie_response.dart';
 import 'package:momentry/providers/movie_provider.dart';
+import 'package:momentry/screens/movie/add/movie_add_screen.dart';
 import 'package:momentry/screens/movie/search/components/movie_search_item.dart';
 
 class MovieSearchBody extends ConsumerWidget {
@@ -42,6 +43,15 @@ class MovieSearchBody extends ConsumerWidget {
             final item = data.items[index];
             return MovieSearchItem(
               item: item,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MovieAddScreen(item: item),
+                    fullscreenDialog: true,
+                  ),
+                );
+              },
             );
           },
         ),
