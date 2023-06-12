@@ -3,10 +3,11 @@ import 'package:momentry/models/movie/movie_detail.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MovieDatabase {
+  final _tableName = 'movie';
   Future<List<MovieDetail>> findAll() async {
     final db = await SqlDatabase.instance.database;
     final List<Map<String, dynamic>> maps = await db.query(
-      'movie',
+      _tableName,
     );
     return maps.map((m) {
       return MovieDetail.fromJson(m);
@@ -16,7 +17,7 @@ class MovieDatabase {
   Future<MovieDetail> findById(int id) async {
     final db = await SqlDatabase.instance.database;
     final List<Map<String, dynamic>> maps = await db.query(
-      'movie',
+      _tableName,
       where: 'id = ?',
       whereArgs: [id],
       limit: 1,
@@ -27,7 +28,7 @@ class MovieDatabase {
   Future<void> insert(Map<String, dynamic> map) async {
     final db = await SqlDatabase.instance.database;
     await db.insert(
-      'movie',
+      _tableName,
       map,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );

@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:momentry/models/post/post.dart';
 
 class PostDatabase {
+  final _tableName = 'post';
   Future<List<Post>> findAll() async {
     final db = await SqlDatabase.instance.database;
     final List<Map<String, dynamic>> maps = await db.query('post');
@@ -14,7 +15,7 @@ class PostDatabase {
   Future<Post> findById(int id) async {
     final db = await SqlDatabase.instance.database;
     final List<Map<String, dynamic>> maps = await db.query(
-      'post',
+      _tableName,
       where: 'id = ?',
       whereArgs: [id],
       limit: 1,
@@ -36,7 +37,7 @@ class PostDatabase {
     //   insertPost = Post.fromJson(results.first);
     // });
     await db.insert(
-      'post',
+      _tableName,
       map,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -45,11 +46,11 @@ class PostDatabase {
   Future<void> update(Post post) async {
     final db = await SqlDatabase.instance.database;
     final id = post.id;
-    await db.update('post', post.toMap(), where: 'id = ?', whereArgs: [id]);
+    await db.update(_tableName, post.toMap(), where: 'id = ?', whereArgs: [id]);
   }
 
   Future<void> delete(int id) async {
     final db = await SqlDatabase.instance.database;
-    await db.delete('post', where: 'id = ?', whereArgs: [id]);
+    await db.delete(_tableName, where: 'id = ?', whereArgs: [id]);
   }
 }
