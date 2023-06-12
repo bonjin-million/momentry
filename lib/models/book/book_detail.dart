@@ -4,7 +4,7 @@ class BookDetail {
   final int id;
   final String title;
   final String image;
-  final List<dynamic> stars;
+  final List<bool> stars;
   final String author;
   final String publisher;
   final String content;
@@ -27,7 +27,7 @@ class BookDetail {
         date = json['date'],
         publisher = json['publisher'],
         author = json['author'],
-        stars = jsonDecode(json['stars']),
+        stars = List<bool>.from(jsonDecode(json['stars'])),
         image = json['image'];
 
   Map<String, dynamic> toMap() => {

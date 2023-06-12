@@ -7,9 +7,11 @@ import 'package:momentry/models/book/book_add_request.dart';
 import 'package:momentry/providers/book/book_list_provider.dart';
 
 class BookAddBody extends ConsumerStatefulWidget {
+  final int id;
   final Book book;
 
-  const BookAddBody({Key? key, required this.book}) : super(key: key);
+  const BookAddBody({Key? key, required this.book, required this.id})
+      : super(key: key);
 
   @override
   ConsumerState<BookAddBody> createState() => _BookAddBodyState();
@@ -17,6 +19,7 @@ class BookAddBody extends ConsumerStatefulWidget {
 
 class _BookAddBodyState extends ConsumerState<BookAddBody> {
   final _bookKey = GlobalKey<FormState>();
+
   List<bool> stars = List.generate(5, (index) => index < 3);
   String content = '';
   String date = '';
@@ -26,6 +29,9 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
     super.initState();
     setState(() {
       date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+      if (widget.book.stars.isNotEmpty) {
+        stars = widget.book.stars;
+      }
     });
   }
 
@@ -48,6 +54,31 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
       ref
           .read(bookListProvider.notifier)
           .add(newBookPost.toMap())
+          .then((value) {
+        Navigator.popUntil(context, (route) => route.isFirst);
+      });
+    }
+  }
+
+  void update() async {
+    final bookKeyState = _bookKey.currentState!;
+
+    if (bookKeyState.validate()) {
+      bookKeyState.save();
+
+      final newBookPost = BookAddRequest(
+        title: widget.book.title,
+        image: widget.book.image,
+        stars: stars,
+        author: widget.book.author,
+        publisher: widget.book.publisher,
+        content: content,
+        date: date,
+      );
+
+      ref
+          .read(bookListProvider.notifier)
+          .update(newBookPost.toMap(), widget.id)
           .then((value) {
         Navigator.popUntil(context, (route) => route.isFirst);
       });
@@ -196,6 +227,7 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                               content = value;
                             }
                           },
+                          initialValue: widget.book.content,
                           autofocus: true,
                           maxLines: null,
                           style: const TextStyle(decorationThickness: 0),
@@ -228,7 +260,7 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                      onPressed: add,
+                      onPressed: widget.id == 0 ? add : update,
                       icon: const Icon(Icons.check),
                     ),
                   ],

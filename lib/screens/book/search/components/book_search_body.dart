@@ -47,7 +47,7 @@ class BookSearchBody extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BookAddScreen(item: item),
+                    builder: (context) => BookAddScreen(item: item, id: 0),
                     fullscreenDialog: true,
                   ),
                 );

@@ -20,5 +20,7 @@ class BookResponse {
         total = json['total'],
         start = json['start'],
         display = json['display'],
-        items = (json['items'] as List).map((e) => Book.fromJson(e)).toList();
+        items = (json['items'] as List)
+            .map((e) => Book.fromJson(e, '', []))
+            .toList();
 }

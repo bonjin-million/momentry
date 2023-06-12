@@ -21,7 +21,6 @@ class BookRepository {
     };
 
     final response = await http.get(uri, headers: headers);
-    print(response.body);
     return BookResponse.fromJson(jsonDecode(response.body));
   }
 
@@ -37,5 +36,13 @@ class BookRepository {
 
   Future<void> add(Map<String, dynamic> bookAddRequest) async {
     await BookDatabase().insert(bookAddRequest);
+  }
+
+  Future<void> update(Map<String, dynamic> bookAddRequest, int id) async {
+    await BookDatabase().update(bookAddRequest, id);
+  }
+
+  Future<void> delete(int id) async {
+    await BookDatabase().delete(id);
   }
 }

@@ -19,8 +19,18 @@ class BookListStateNotifier
     state = await AsyncValue.guard(() => repository.fetchList());
   }
 
-  Future<void> add(Map<String, dynamic> post) async {
-    await repository.add(post);
+  Future<void> add(Map<String, dynamic> bookAddRequest) async {
+    await repository.add(bookAddRequest);
+    findAll();
+  }
+
+  Future<void> update(Map<String, dynamic> bookAddRequest, int id) async {
+    await repository.update(bookAddRequest, id);
+    findAll();
+  }
+
+  Future<void> delete(int id) async {
+    await repository.delete(id);
     findAll();
   }
 }
