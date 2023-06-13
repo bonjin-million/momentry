@@ -47,24 +47,27 @@ class _BookDetailBodyState extends ConsumerState<BookDetailBody> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.4,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(8),
-                bottomRight: Radius.circular(8),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 18.0),
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
+                ),
               ),
-            ),
-            child: AspectRatio(
-              aspectRatio: 3 / 4,
-              child: Image.network(
-                item.image,
-                fit: BoxFit.contain,
+              child: AspectRatio(
+                aspectRatio: 3 / 4,
+                child: Image.network(
+                  item.image,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
               item.title,
               textAlign: TextAlign.center,
@@ -87,20 +90,21 @@ class _BookDetailBodyState extends ConsumerState<BookDetailBody> {
               ).toList(),
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 3,
-            color: Colors.black12,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 2,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
           Container(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                child: Text(
-                  item.content,
-                  textAlign: TextAlign.left,
-                ),
+              padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
+              child: Text(
+                item.content,
+                textAlign: TextAlign.left,
               ),
             ),
           )

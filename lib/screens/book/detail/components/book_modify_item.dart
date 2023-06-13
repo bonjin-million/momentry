@@ -74,8 +74,15 @@ class _BookModifyItemState extends ConsumerState<BookModifyItem> {
         child: Visibility(
           visible: widget.isVisible,
           child: Container(
-            height: 100,
-            color: Colors.cyan,
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondaryContainer,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  width: 0,
+                  color: Colors.white30,
+                )),
+            height: 80,
+            width: 120,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -91,12 +98,28 @@ class _BookModifyItemState extends ConsumerState<BookModifyItem> {
                           ),
                         );
                       },
-                      child: Text("수정")),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.mode_edit),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text("수정하기"),
+                        ],
+                      )),
                   InkWell(
                       onTap: () {
                         delete();
                       },
-                      child: Text("삭제"))
+                      child: const Row(
+                        children: [
+                          Icon(Icons.delete),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text("삭제하기"),
+                        ],
+                      ))
                 ],
               ),
             ),

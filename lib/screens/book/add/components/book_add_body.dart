@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:momentry/models/book/book.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -126,8 +125,9 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                         padding: const EdgeInsets.fromLTRB(50, 10, 50, 25),
                         child: Container(
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: Colors.blueAccent.withOpacity(0.5),
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
                           child: Padding(
@@ -222,7 +222,6 @@ class _BookAddBodyState extends ConsumerState<BookAddBody> {
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: TextFormField(
                           onSaved: (value) {
-                            print(value);
                             if (value != null) {
                               content = value;
                             }
