@@ -51,9 +51,10 @@ class SqlDatabase {
           title TEXT,
           content TEXT,
           image TEXT,
-          publisher TEXT,
-          author TEXT,
+          directors TEXT,
+          actors TEXT,
           stars TEXT,
+          prodYear TEXT,
           date TEXT
         )
   ''';

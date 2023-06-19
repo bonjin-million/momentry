@@ -3,8 +3,10 @@ import 'package:momentry/models/movie/movie.dart';
 import 'package:momentry/screens/movie/add/components/movie_add_body.dart';
 
 class MovieAddScreen extends StatefulWidget {
-  const MovieAddScreen({Key? key, required this.item}) : super(key: key);
+  const MovieAddScreen({Key? key, required this.item, required this.id})
+      : super(key: key);
   final Movie item;
+  final int id;
 
   @override
   State<MovieAddScreen> createState() => _MovieAddScreenState();

@@ -21,8 +21,16 @@ class Movie {
       : title = json['title'],
         prodYear = json['prodYear'],
         detailUrl = json['kmdbUrl'],
-        posters = json['posters'].toString().split("|").map((e) => MoviePoster(imageUrl: e)).toList(),
-        stills = json['stills'].toString().split("|").map((e) => MovieStill(imageUrl: e)).toList(),
+        posters = json['posters']
+            .toString()
+            .split("|")
+            .map((e) => MoviePoster(imageUrl: e))
+            .toList(),
+        stills = json['stills']
+            .toString()
+            .split("|")
+            .map((e) => MovieStill(imageUrl: e))
+            .toList(),
         actors = (json['actors']["actor"] as List)
             .map((e) => MovieActor.fromJson(e))
             .toList(),
@@ -36,8 +44,7 @@ class MoviePoster {
 
   MoviePoster({required this.imageUrl});
 
-  MoviePoster.fromJson(Map<String, dynamic> json)
-      : imageUrl = json['imageUrl'];
+  MoviePoster.fromJson(Map<String, dynamic> json) : imageUrl = json['imageUrl'];
 }
 
 class MovieStill {
@@ -45,8 +52,7 @@ class MovieStill {
 
   MovieStill({required this.imageUrl});
 
-  MovieStill.fromJson(Map<String, dynamic> json)
-      : imageUrl = json['imageUrl'];
+  MovieStill.fromJson(Map<String, dynamic> json) : imageUrl = json['imageUrl'];
 }
 
 class MovieDirector {
@@ -60,10 +66,18 @@ class MovieDirector {
     required this.directorId,
   });
 
-  MovieDirector.fromJson(Map<String, dynamic> json)
-      : directorNm = json['directorNm'],
-        directorEnNm = json['directorEnNm'],
-        directorId = json['directorId'];
+  factory MovieDirector.fromJson(Map<String, dynamic> json) => MovieDirector(
+      directorNm: json['directorNm'],
+      directorEnNm: json['directorEnNm'],
+      directorId: json['directorId']);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'directorNm': directorNm,
+      'directorEnNm': directorEnNm,
+      'directorId': directorId,
+    };
+  }
 }
 
 class MovieActor {
@@ -77,8 +91,16 @@ class MovieActor {
     required this.actorId,
   });
 
-  MovieActor.fromJson(Map<String, dynamic> json)
-      : actorNm = json['actorNm'],
-        actorEnNm = json['actorEnNm'],
-        actorId = json['actorId'];
+  factory MovieActor.fromJson(Map<String, dynamic> json) => MovieActor(
+      actorNm: json['actorNm'],
+      actorEnNm: json['actorEnNm'],
+      actorId: json['actorId']);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'actorNm': actorNm,
+      'actorEnNm': actorEnNm,
+      'actorId': actorId,
+    };
+  }
 }

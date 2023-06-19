@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+import 'movie.dart';
+
 class MovieAddRequest {
   final String title;
   final String image;
   final List<dynamic> stars;
-  final String author;
-  final String publisher;
+  final List<MovieActor> actors;
+  final List<MovieDirector> directors;
+  final String prodYear;
   final String content;
   final String date;
 
@@ -11,8 +16,9 @@ class MovieAddRequest {
       {required this.title,
       required this.image,
       required this.stars,
-      required this.author,
-      required this.publisher,
+      required this.directors,
+      required this.actors,
+      required this.prodYear,
       required this.content,
       required this.date});
 
@@ -20,17 +26,32 @@ class MovieAddRequest {
       : title = json['title'],
         content = json['content'],
         date = json['date'],
-        publisher = json['publisher'],
-        author = json['author'],
+        actors = json['actors'],
+        prodYear = json['prodYear'],
+        directors = json['directors'],
         stars = json['stars'],
         image = json['image'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'image': image,
+      'stars': stars,
+      'directors': directors,
+      'prodYear': prodYear,
+      'actors': actors,
+      'content': content,
+      'date': date
+    };
+  }
 
   Map<String, dynamic> toMap() => {
         'title': title,
         'image': image,
         'stars': stars.toString(),
-        'author': author,
-        'publisher': publisher,
+        'directors': jsonEncode(directors),
+        'prodYear': prodYear,
+        'actors': jsonEncode(actors),
         'content': content,
         'date': date,
       };

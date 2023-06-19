@@ -71,6 +71,87 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 50,
+                      child: Text(
+                        '개봉',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    // Text(widget.book.author),
+                    Expanded(
+                      child: Text(
+                        item.prodYear,
+                        maxLines: null,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 50,
+                      child: Text(
+                        '감독',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Wrap(
+                        children: item.directors
+                            .map((e) => Text(
+                                  e.directorNm,
+                                  textAlign: TextAlign.center,
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 50,
+                      child: Text(
+                        '배우',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Wrap(
+                        children: item.actors
+                            .map((e) => Text(
+                                  e.actorNm,
+                                  textAlign: TextAlign.center,
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
             child: Row(
               mainAxisSize: MainAxisSize.min,

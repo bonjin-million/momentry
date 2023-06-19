@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:momentry/models/book/book.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momentry/models/book/book_add_request.dart';
 import 'package:momentry/models/movie/movie.dart';
 import 'package:momentry/models/movie/movie_add_request.dart';
-import 'package:momentry/providers/book/book_list_provider.dart';
 import 'package:momentry/providers/movie/movie_list_provider.dart';
 import 'package:momentry/widgets/custom_image.dart';
 
@@ -43,10 +40,11 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
         title: widget.item.title,
         image: widget.item.posters.firstOrNull?.imageUrl ?? '',
         stars: stars,
-        author: widget.item.directors.toString(),
-        publisher: widget.item.actors.toString(),
+        directors: widget.item.directors,
+        actors: widget.item.actors,
         content: content,
         date: date,
+        prodYear: widget.item.prodYear,
       );
 
       ref
@@ -80,7 +78,9 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                           child: AspectRatio(
                             aspectRatio: 3 / 4,
                             child: CustomImage(
-                              imageUrl: widget.item.posters.firstOrNull?.imageUrl ?? '',
+                              imageUrl:
+                                  widget.item.posters.firstOrNull?.imageUrl ??
+                                      '',
                             ),
                           ),
                         ),
@@ -173,9 +173,9 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                                       child: Wrap(
                                         children: widget.item.actors
                                             .map((e) => Text(
-                                          e.actorNm,
-                                          textAlign: TextAlign.center,
-                                        ))
+                                                  e.actorNm,
+                                                  textAlign: TextAlign.center,
+                                                ))
                                             .toList(),
                                       ),
                                     ),
