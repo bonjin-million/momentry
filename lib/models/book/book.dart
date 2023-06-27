@@ -28,7 +28,7 @@ class Book {
       : title = json['title'],
         link = json['link'],
         image = json['image'],
-        author = json['author'],
+        author = json['author'].replaceAll("^", ", "),
         discount = json['discount'],
         publisher = json['publisher'],
         isbn = json['isbn'],

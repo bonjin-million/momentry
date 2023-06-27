@@ -18,7 +18,7 @@ class Movie {
   });
 
   Movie.fromJson(Map<String, dynamic> json)
-      : title = json['title'],
+      : title = json['title'].replaceAll("!HS ", "").replaceAll("!HE ", ""),
         prodYear = json['prodYear'],
         detailUrl = json['kmdbUrl'],
         posters = json['posters']

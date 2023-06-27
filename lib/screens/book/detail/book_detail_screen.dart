@@ -25,7 +25,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                 isVisible = !isVisible;
               });
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.more_vert),
           ),
         ],
       ),

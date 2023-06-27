@@ -43,6 +43,7 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
     }
 
     final item = state.value;
+    final actors = item.actors.map((e) => e.actorNm).join(", ");
 
     return SingleChildScrollView(
       child: Column(
@@ -138,12 +139,7 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
                     ),
                     Expanded(
                       child: Wrap(
-                        children: item.actors
-                            .map((e) => Text(
-                                  e.actorNm,
-                                  textAlign: TextAlign.center,
-                                ))
-                            .toList(),
+                        children: [Text(actors, textAlign: TextAlign.center)],
                       ),
                     ),
                   ],

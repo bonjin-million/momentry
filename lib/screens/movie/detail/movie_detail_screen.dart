@@ -25,7 +25,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 isVisible = !isVisible;
               });
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.more_vert),
           ),
         ],
       ),
