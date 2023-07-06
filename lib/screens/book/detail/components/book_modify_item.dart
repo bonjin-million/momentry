@@ -81,7 +81,7 @@ class _BookModifyItemState extends ConsumerState<BookModifyItem> {
                   width: 0,
                   color: Colors.white30,
                 )),
-            height: 80,
+            height: 85,
             width: 120,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -107,9 +107,13 @@ class _BookModifyItemState extends ConsumerState<BookModifyItem> {
                           Text("수정하기"),
                         ],
                       )),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   InkWell(
                       onTap: () {
-                        delete();
+                        showAlert();
+                        // delete();
                       },
                       child: const Row(
                         children: [
@@ -127,5 +131,38 @@ class _BookModifyItemState extends ConsumerState<BookModifyItem> {
         ),
       ),
     );
+  }
+
+  void showAlert() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            content: const Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [Text('정말 삭제하시나요?'), Text('(삭제된 데이터는 복원되지 않아요)')],
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text("취소"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: const Text("확인"),
+                onPressed: () {
+                  delete();
+                },
+              ),
+            ],
+          );
+        });
   }
 }
