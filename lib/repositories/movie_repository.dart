@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:momentry/database/movie_database.dart';
+import 'package:momentry/models/movie/movie_credits_response.dart';
 import 'package:momentry/models/movie/movie_detail.dart';
 import 'dart:core';
 
@@ -21,9 +22,16 @@ class MovieRepository {
 
     final response = await http.get(uri);
 
-    print("@@@@@@@ ${MovieResponse.fromJson(jsonDecode(response.body))}");
-
     return MovieResponse.fromJson(jsonDecode(response.body));
+  }
+
+  Future<MovieCreditsResponse> fetchItemDetail({required int id}) async {
+    final uri = Uri.parse(
+        'https://api.themoviedb.org/3/movie/$id/credits?api_key=$apiKey&language=ko-KR');
+
+    final response = await http.get(uri);
+
+    return MovieCreditsResponse.fromJson(jsonDecode(response.body));
   }
 
   Future<List<MovieDetail>> fetchList() async {
@@ -32,21 +40,16 @@ class MovieRepository {
   }
 
   Future<MovieDetail> fetchDetailItem(int id) async {
-    // final response = await MovieDatabase().findById(id);
-    // return response;
-
-    final uri = Uri.parse(
-        'https://api.themoviedb.org/3/search/movie?api_key=$apiKey&query=$id&language=ko-KR');
-
-    final response = await http.get(uri);
-
-    print("@@@@@@@ ${MovieDetail.fromJson(jsonDecode(response.body))}");
-
-    return MovieDetail.fromJson(jsonDecode(response.body));
+    final response = await MovieDatabase().findById(id);
+    return response;
   }
 
   Future<void> add(Map<String, dynamic> data) async {
     await MovieDatabase().insert(data);
+  }
+
+  Future<void> update(Map<String, dynamic> movieAddRequest, int id) async {
+    await MovieDatabase().update(movieAddRequest, id);
   }
 
   Future<void> delete(int id) async {

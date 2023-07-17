@@ -20,7 +20,7 @@ class _MovieSearchScreenState extends ConsumerState<MovieSearchScreen> {
         titleSpacing: 0,
         title: TextField(
           controller: _searchController,
-          decoration:  InputDecoration(
+          decoration: InputDecoration(
             hintText: '영화 검색',
             border: InputBorder.none,
             suffixIcon: Visibility(
@@ -40,14 +40,14 @@ class _MovieSearchScreenState extends ConsumerState<MovieSearchScreen> {
           },
           autofocus: true,
           onSubmitted: (value) {
-            if(value.isNotEmpty) {
+            if (value.isNotEmpty) {
               ref.read(movieProvider.notifier).fetchItems(keyword: value);
             }
           },
         ),
         centerTitle: false,
       ),
-      body: MovieSearchBody(),
+      body: const MovieSearchBody(),
     );
   }
 }

@@ -14,7 +14,6 @@ class MovieListBody extends ConsumerStatefulWidget {
 }
 
 class _MovieListBodyState extends ConsumerState<MovieListBody> {
-
   @override
   void initState() {
     super.initState();
@@ -26,7 +25,6 @@ class _MovieListBodyState extends ConsumerState<MovieListBody> {
 
   @override
   Widget build(BuildContext context) {
-
     final state = ref.watch(movieListProvider);
     final isData = state is AsyncData<List<MovieDetail>>;
     final isLoading = state is AsyncLoading;
@@ -57,7 +55,9 @@ class _MovieListBodyState extends ConsumerState<MovieListBody> {
                 'assets/images/panic.png',
                 width: MediaQuery.of(context).size.width * 0.2,
               ),
-              const SizedBox(height: 24,),
+              const SizedBox(
+                height: 24,
+              ),
               const Text('등록된 영화가 없어요'),
             ],
           ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/movie/movie_detail.dart';
 import 'package:momentry/providers/movie/movie_detail_provider.dart';
+import 'package:momentry/screens/movie/add/movie_add_screen.dart';
+
+import '../../../../providers/movie/movie_list_provider.dart';
 
 class MovieModifyItem extends ConsumerStatefulWidget {
   final bool isVisible;
@@ -23,11 +26,11 @@ class _MovieModifyItemState extends ConsumerState<MovieModifyItem> {
     });
   }
 
-  // void delete() async {
-  //   ref.read(movieListProvider.notifier).delete(widget.id).then((value) {
-  //     Navigator.popUntil(context, (route) => route.isFirst);
-  //   });
-  // }
+  void delete() async {
+    ref.read(movieListProvider.notifier).delete(widget.id).then((value) {
+      Navigator.popUntil(context, (route) => route.isFirst);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +54,6 @@ class _MovieModifyItemState extends ConsumerState<MovieModifyItem> {
 
     final item = state.value;
 
-    print("item ===  $item ");
-
-    // final movie = MovieDetail(
-    //     id: item.id,
-    //     title: item.title,
-    //     image: item.image,
-    //     stars: item.stars,
-    //     author: item.author,
-    //     publisher: item.publisher,
-    //     content: item.content,
-    //     date: item.date);
-
     return Align(
       alignment: Alignment.topRight,
       child: Padding(
@@ -77,7 +68,7 @@ class _MovieModifyItemState extends ConsumerState<MovieModifyItem> {
                   width: 0,
                   color: Colors.white30,
                 )),
-            height: 80,
+            height: 85,
             width: 120,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -85,14 +76,14 @@ class _MovieModifyItemState extends ConsumerState<MovieModifyItem> {
                 children: [
                   InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) =>
-                        //         MovieAddScreen(item: movie, id: item.id),
-                        //     fullscreenDialog: true,
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                MovieAddScreen(detailItem: item),
+                            fullscreenDialog: true,
+                          ),
+                        );
                       },
                       child: const Row(
                         children: [
@@ -103,9 +94,12 @@ class _MovieModifyItemState extends ConsumerState<MovieModifyItem> {
                           Text("수정하기"),
                         ],
                       )),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   InkWell(
                       onTap: () {
-                        // delete();
+                        showAlert();
                       },
                       child: const Row(
                         children: [
@@ -123,5 +117,38 @@ class _MovieModifyItemState extends ConsumerState<MovieModifyItem> {
         ),
       ),
     );
+  }
+
+  void showAlert() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            content: const Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [Text('정말 삭제하시나요?'), Text('(삭제된 데이터는 복원되지 않아요)')],
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text("취소"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: const Text("확인"),
+                onPressed: () {
+                  delete();
+                },
+              ),
+            ],
+          );
+        });
   }
 }

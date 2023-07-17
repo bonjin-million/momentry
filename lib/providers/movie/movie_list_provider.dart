@@ -7,7 +7,8 @@ final movieListProvider = StateNotifierProvider((ref) {
   return MovieListStateNotifier(repository: repository);
 });
 
-class MovieListStateNotifier extends StateNotifier<AsyncValue<List<MovieDetail>>> {
+class MovieListStateNotifier
+    extends StateNotifier<AsyncValue<List<MovieDetail>>> {
   final MovieRepository repository;
 
   MovieListStateNotifier({required this.repository})
@@ -20,6 +21,16 @@ class MovieListStateNotifier extends StateNotifier<AsyncValue<List<MovieDetail>>
 
   Future<void> add(Map<String, dynamic> post) async {
     await repository.add(post);
+    findAll();
+  }
+
+  Future<void> update(Map<String, dynamic> movieAddRequest, int id) async {
+    await repository.update(movieAddRequest, id);
+    findAll();
+  }
+
+  Future<void> delete(int id) async {
+    await repository.delete(id);
     findAll();
   }
 }

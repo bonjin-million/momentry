@@ -33,4 +33,18 @@ class MovieDatabase {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
+
+  Future<void> update(Map<String, dynamic> map, int id) async {
+    final db = await SqlDatabase.instance.database;
+    await db.update(_tableName, map, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> delete(int id) async {
+    final db = await SqlDatabase.instance.database;
+    await db.delete(
+      _tableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

@@ -12,12 +12,19 @@ class MovieListScreen extends StatelessWidget {
         centerTitle: false,
         title: const Text('영화'),
         actions: [
-          IconButton(onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => MovieSearchScreen(),),);
-          }, icon: const Icon(Icons.add),),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const MovieSearchScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
-      body: MovieListBody(),
+      body: const MovieListBody(),
     );
   }
 }

@@ -1,19 +1,17 @@
-import 'dart:convert';
-
-import 'movie.dart';
-
 class MovieAddRequest {
   final String title;
+  final int movieId;
   final String image;
   final List<dynamic> stars;
-  final List<MovieActor> actors;
-  final List<MovieDirector> directors;
+  final String actors;
+  final String directors;
   final String prodYear;
   final String content;
   final String date;
 
   MovieAddRequest(
       {required this.title,
+      required this.movieId,
       required this.image,
       required this.stars,
       required this.directors,
@@ -24,6 +22,7 @@ class MovieAddRequest {
 
   MovieAddRequest.fromJson(Map<String, dynamic> json)
       : title = json['title'],
+        movieId = json['movieId'],
         content = json['content'],
         date = json['date'],
         actors = json['actors'],
@@ -35,6 +34,7 @@ class MovieAddRequest {
   Map<String, dynamic> toJson() {
     return {
       'title': title,
+      'movieId': movieId,
       'image': image,
       'stars': stars,
       'directors': directors,
@@ -49,9 +49,9 @@ class MovieAddRequest {
         'title': title,
         'image': image,
         'stars': stars.toString(),
-        'directors': jsonEncode(directors),
+        'directors': directors,
         'prodYear': prodYear,
-        'actors': jsonEncode(actors),
+        'actors': actors,
         'content': content,
         'date': date,
       };

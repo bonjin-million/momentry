@@ -43,15 +43,14 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
     }
 
     final item = state.value;
-    final actors = item.actors.map((e) => e.actorNm).join(", ");
 
     return SingleChildScrollView(
       child: Column(
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.4,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
                 topRight: Radius.circular(8),
                 bottomRight: Radius.circular(8),
               ),
@@ -87,7 +86,6 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
                             fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                     ),
-                    // Text(widget.book.author),
                     Expanded(
                       child: Text(
                         item.prodYear,
@@ -113,18 +111,17 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
                       ),
                     ),
                     Expanded(
-                      child: Wrap(
-                        children: item.directors
-                            .map((e) => Text(
-                                  e.directorNm,
-                                  textAlign: TextAlign.center,
-                                ))
-                            .toList(),
-                      ),
+                      child: Wrap(children: [
+                        Text(
+                          item.directors,
+                          textAlign: TextAlign.center,
+                        )
+                      ]),
                     ),
                   ],
                 ),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       width: 50,
@@ -139,7 +136,9 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
                     ),
                     Expanded(
                       child: Wrap(
-                        children: [Text(actors, textAlign: TextAlign.center)],
+                        children: [
+                          Text(item.actors, textAlign: TextAlign.start)
+                        ],
                       ),
                     ),
                   ],
@@ -173,11 +172,9 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Container(
-                child: Text(
-                  item.content,
-                  textAlign: TextAlign.left,
-                ),
+              child: Text(
+                item.content,
+                textAlign: TextAlign.left,
               ),
             ),
           )

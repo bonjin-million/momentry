@@ -4,19 +4,23 @@ import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/movie/movie.dart';
 import 'package:momentry/models/movie/movie_add_request.dart';
+import 'package:momentry/models/movie/movie_credits_response.dart';
+import 'package:momentry/models/movie/movie_detail.dart';
 import 'package:momentry/providers/movie/movie_list_provider.dart';
+import 'package:momentry/providers/movie_credits_provider.dart';
 import 'package:momentry/widgets/custom_image.dart';
 
 class MovieAddBody extends ConsumerStatefulWidget {
-  final Movie item;
+  final Movie? item;
+  final MovieDetail? detailItem;
 
-  const MovieAddBody({Key? key, required this.item}) : super(key: key);
+  const MovieAddBody({Key? key, this.item, this.detailItem}) : super(key: key);
 
   @override
-  ConsumerState<MovieAddBody> createState() => _BookAddBodyState();
+  ConsumerState<MovieAddBody> createState() => _MovieAddBodyState();
 }
 
-class _BookAddBodyState extends ConsumerState<MovieAddBody> {
+class _MovieAddBodyState extends ConsumerState<MovieAddBody> {
   final _formKey = GlobalKey<FormState>();
   List<bool> stars = List.generate(5, (index) => index < 3);
   String content = '';
@@ -28,23 +32,35 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
     setState(() {
       date = DateFormat('yyyy-MM-dd').format(DateTime.now());
     });
+    if (widget.item != null) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        ref
+            .read(movieCreditsProvider.notifier)
+            .fetchItemDetail(id: widget.item!.id);
+      });
+    } else {
+      if (widget.detailItem!.stars.isNotEmpty) {
+        stars = widget.detailItem!.stars;
+      }
+    }
   }
 
-  void add() async {
+  void add(String directors, String actors) async {
     final currentState = _formKey.currentState!;
 
     if (currentState.validate()) {
       currentState.save();
 
       final newMoviePost = MovieAddRequest(
-        title: widget.item.title,
-        image: widget.item.posters.firstOrNull?.imageUrl ?? '',
+        title: widget.item?.title ?? '',
+        movieId: widget.item?.id ?? 0,
+        image: widget.item?.posterPath ?? '',
         stars: stars,
-        directors: widget.item.directors,
-        actors: widget.item.actors,
+        directors: directors,
+        actors: actors,
         content: content,
         date: date,
-        prodYear: widget.item.prodYear,
+        prodYear: widget.item?.releaseDate ?? '',
       );
 
       ref
@@ -56,8 +72,77 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
     }
   }
 
+  void update(String directors, String actors) async {
+    final currentState = _formKey.currentState!;
+
+    if (currentState.validate()) {
+      currentState.save();
+
+      final newMoviePost = MovieAddRequest(
+          title: widget.detailItem?.title ?? '',
+          movieId: widget.detailItem?.id ?? 0,
+          image: widget.detailItem?.image ?? '',
+          stars: stars,
+          directors: directors,
+          actors: actors,
+          content: content,
+          date: date,
+          prodYear: widget.detailItem?.prodYear ?? '');
+
+      ref
+          .read(movieListProvider.notifier)
+          .update(newMoviePost.toMap(), widget.detailItem!.id)
+          .then((value) {
+        Navigator.popUntil(context, (route) => route.isFirst);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    String? actors = '';
+    String? directors = '';
+    String? image = '';
+    String? releaseDate = '';
+    String? title = '';
+
+    if (widget.item != null) {
+      final state = ref.watch(movieCreditsProvider);
+      final isData = state is AsyncData<MovieCreditsResponse>;
+      final isLoading = state is AsyncLoading;
+      final isError = state is AsyncError;
+
+      if (isLoading || !isData) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
+      if (isError) {
+        return const Center(
+          child: Text('오류!'),
+        );
+      }
+
+      final credits = state.value;
+      actors = credits.cast.map((e) => e.name).join(", ");
+      directors = credits.crew
+          .where((e) => e.job == 'Director')
+          .map(
+            (e) => e.name ?? '',
+          )
+          .join(", ");
+      image = widget.item?.posterPath;
+      releaseDate = widget.item?.releaseDate;
+      title = widget.item?.title;
+    } else {
+      actors = widget.detailItem?.actors;
+      directors = widget.detailItem?.directors;
+      image = widget.detailItem?.image;
+      releaseDate = widget.detailItem?.prodYear;
+      title = widget.detailItem?.title;
+    }
+
     return SafeArea(
       child: GestureDetector(
         onTap: () {
@@ -78,9 +163,7 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                           child: AspectRatio(
                             aspectRatio: 3 / 4,
                             child: CustomImage(
-                              imageUrl:
-                                  widget.item.posters.firstOrNull?.imageUrl ??
-                                      '',
+                              imageUrl: image ?? '',
                             ),
                           ),
                         ),
@@ -88,7 +171,7 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(40, 0, 40, 10),
                         child: Text(
-                          widget.item.title,
+                          title ?? '',
                           style: const TextStyle(
                             fontSize: 18,
                           ),
@@ -108,6 +191,7 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
                                       width: 50,
@@ -119,19 +203,11 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                                             fontWeight: FontWeight.w500),
                                       ),
                                     ),
-                                    // Text(widget.book.author),
-                                    Expanded(
-                                      child: Text(
-                                        widget.item.prodYear,
-                                        maxLines: null,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
+                                    Text(releaseDate ?? ''),
                                   ],
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
                                       width: 50,
@@ -145,18 +221,17 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                                       ),
                                     ),
                                     Expanded(
-                                      child: Wrap(
-                                        children: widget.item.directors
-                                            .map((e) => Text(
-                                                  e.directorNm,
-                                                  textAlign: TextAlign.center,
-                                                ))
-                                            .toList(),
-                                      ),
+                                      child: Wrap(children: [
+                                        Text(
+                                          directors ?? '',
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ]),
                                     ),
                                   ],
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
                                       width: 50,
@@ -170,14 +245,12 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                                       ),
                                     ),
                                     Expanded(
-                                      child: Wrap(
-                                        children: widget.item.actors
-                                            .map((e) => Text(
-                                                  e.actorNm,
-                                                  textAlign: TextAlign.center,
-                                                ))
-                                            .toList(),
-                                      ),
+                                      child: Wrap(children: [
+                                        Text(
+                                          actors ?? '',
+                                          textAlign: TextAlign.left,
+                                        )
+                                      ]),
                                     ),
                                   ],
                                 ),
@@ -223,11 +296,11 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: TextFormField(
                           onSaved: (value) {
-                            print(value);
                             if (value != null) {
                               content = value;
                             }
                           },
+                          initialValue: widget.detailItem?.content ?? '',
                           autofocus: true,
                           maxLines: null,
                           style: const TextStyle(decorationThickness: 0),
@@ -260,7 +333,11 @@ class _BookAddBodyState extends ConsumerState<MovieAddBody> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                      onPressed: add,
+                      onPressed: () {
+                        widget.item != null
+                            ? add(directors ?? '', actors ?? '')
+                            : update(directors ?? '', actors ?? '');
+                      },
                       icon: const Icon(Icons.check),
                     ),
                   ],

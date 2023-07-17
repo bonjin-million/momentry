@@ -1,17 +1,15 @@
 import 'dart:convert';
 
-import 'movie.dart';
-
 class MovieDetail {
   final int id;
   final String title;
   final String image;
   final List<bool> stars;
   final String content;
-  final String date;
+  final String? date;
   final String prodYear; // 제작년도
-  final List<MovieActor> actors;
-  final List<MovieDirector> directors;
+  final String actors;
+  final String directors;
 
   MovieDetail(
       {required this.id,
@@ -32,12 +30,8 @@ class MovieDetail {
         stars = List<bool>.from(jsonDecode(json['stars'])),
         image = json['image'],
         prodYear = json['prodYear'],
-        actors = List<MovieActor>.from(jsonDecode(json['actors'])
-            .map((e) => MovieActor.fromJson(e))
-            .toList()),
-        directors = List<MovieDirector>.from(jsonDecode(json['directors'])
-            .map((e) => MovieDirector.fromJson(e))
-            .toList());
+        actors = json['actors'],
+        directors = json['directors'];
 
   Map<String, dynamic> toMap() => {
         'id': id,

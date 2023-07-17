@@ -47,7 +47,9 @@ class MovieSearchBody extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MovieAddScreen(item: item, id: 0),
+                    builder: (context) => MovieAddScreen(
+                      item: item,
+                    ),
                     fullscreenDialog: true,
                   ),
                 );
