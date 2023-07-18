@@ -28,6 +28,36 @@ class MovieSearchBody extends ConsumerWidget {
 
     final data = state.value;
 
+    if (data.items.isEmpty) {
+      return Center(
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/oops.png',
+                width: MediaQuery.of(context).size.width * 0.2,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              const Text('검색된 영화가 없어요'),
+              TextButton(
+                  onPressed: () {
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const MovieAddScreen(),
+                    //   ),
+                    // );
+                  },
+                  child: const Text('직접 입력')),
+            ],
+          ),
+        ),
+      );
+    }
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
