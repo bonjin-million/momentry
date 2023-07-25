@@ -225,7 +225,8 @@ class _MovieAddBodyState extends ConsumerState<MovieAddBody> {
                           padding: const EdgeInsets.fromLTRB(50, 0, 50, 25),
                           child: AspectRatio(
                             aspectRatio: 3 / 4,
-                            child: widget.type == 'FILE' && _imageFile != null
+                            child: widget.type == 'FILE' &&
+                                    widget.item?.image != null
                                 ? Image.memory(base64Decode(image!),
                                     fit: BoxFit.contain)
                                 : widget.type == 'PATH' ||
