@@ -1,8 +1,8 @@
-import 'package:momentry/models/movie/movie.dart';
+import 'package:momentry/models/movie/movie_detail.dart';
 
 class MovieResponse {
   final int page;
-  final List<Movie> items;
+  final List<MovieDetail> items;
 
   MovieResponse({
     required this.page,
@@ -12,6 +12,8 @@ class MovieResponse {
   MovieResponse.fromJson(Map<String, dynamic> json)
       : page = json['page'],
         items = json['results'] != null
-            ? (json['results'] as List).map((e) => Movie.fromJson(e)).toList()
+            ? (json['results'] as List)
+                .map((e) => MovieDetail.fromApiJson(e))
+                .toList()
             : [];
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:momentry/models/movie/movie.dart';
+import 'package:momentry/models/movie/movie_detail.dart';
 import 'package:momentry/widgets/custom_image.dart';
 
 class MovieSearchItem extends StatelessWidget {
-  final Movie item;
+  final MovieDetail item;
   final GestureTapCallback? onTap;
-
   const MovieSearchItem({Key? key, required this.item, this.onTap})
       : super(key: key);
 
@@ -32,7 +31,7 @@ class MovieSearchItem extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 3 / 4,
                 child: CustomImage(
-                  imageUrl: item.posterPath,
+                  imageUrl: item.image,
                 ),
               ),
             ),
@@ -47,7 +46,7 @@ class MovieSearchItem extends StatelessWidget {
             ),
           ),
           Text(
-            item.releaseDate,
+            item.prodYear,
             style: const TextStyle(
               color: Colors.grey,
               fontSize: 12,

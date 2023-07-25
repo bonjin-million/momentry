@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:momentry/models/movie/movie_detail.dart';
 
@@ -27,10 +30,17 @@ class MovieListItem extends StatelessWidget {
                 ),
                 child: AspectRatio(
                   aspectRatio: 3 / 4,
-                  child: Image.network(
-                    item.image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: item.type == 'FILE'
+                      ? Image.memory(
+                          base64Decode(
+                            item.image,
+                          ),
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          item.image,
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
               Text(

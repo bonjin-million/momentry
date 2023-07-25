@@ -45,11 +45,13 @@ class MovieSearchBody extends ConsumerWidget {
               const Text('검색된 영화가 없어요'),
               TextButton(
                   onPressed: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const MovieAddScreen(),
-                    //   ),
-                    // );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MovieAddScreen(
+                          type: 'FILE',
+                        ),
+                      ),
+                    );
                   },
                   child: const Text('직접 입력')),
             ],
@@ -77,9 +79,8 @@ class MovieSearchBody extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MovieAddScreen(
-                      item: item,
-                    ),
+                    builder: (context) =>
+                        MovieAddScreen(item: item, type: "PATH"),
                     fullscreenDialog: true,
                   ),
                 );

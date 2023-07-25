@@ -48,6 +48,7 @@ class SqlDatabase {
   final _movieTable = '''
           CREATE TABLE movie(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
+          movieId INTEGER,
           title TEXT,
           content TEXT,
           image TEXT,
@@ -55,7 +56,8 @@ class SqlDatabase {
           actors TEXT,
           stars TEXT,
           prodYear TEXT,
-          date TEXT
+          date TEXT,
+          type TEXT
         )
   ''';
 

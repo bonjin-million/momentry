@@ -8,9 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:momentry/models/post/post_add_request.dart';
 import 'package:momentry/providers/post/post_list_provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:uuid/uuid.dart';
 
 class PostAddBody extends ConsumerStatefulWidget {
   const PostAddBody({Key? key}) : super(key: key);
@@ -24,7 +22,6 @@ class _PostAddBodyState extends ConsumerState<PostAddBody> {
   TextEditingController dateController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
   XFile? _imageFile;
-
   String title = '';
   String content = '';
   String date = '';

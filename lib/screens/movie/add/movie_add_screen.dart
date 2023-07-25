@@ -4,10 +4,10 @@ import 'package:momentry/models/movie/movie_detail.dart';
 import 'package:momentry/screens/movie/add/components/movie_add_body.dart';
 
 class MovieAddScreen extends StatefulWidget {
-  const MovieAddScreen({Key? key, this.item, this.detailItem})
+  const MovieAddScreen({Key? key, this.item, required this.type})
       : super(key: key);
-  final Movie? item;
-  final MovieDetail? detailItem;
+  final MovieDetail? item;
+  final String type;
 
   @override
   State<MovieAddScreen> createState() => _MovieAddScreenState();
@@ -20,7 +20,7 @@ class _MovieAddScreenState extends State<MovieAddScreen> {
       appBar: AppBar(
         title: const Text('영화 후기 작성'),
       ),
-      body: MovieAddBody(item: (widget.item), detailItem: widget.detailItem),
+      body: MovieAddBody(item: widget.item, type: widget.type),
     );
   }
 }

@@ -12,13 +12,13 @@ class PostListScreen extends StatelessWidget {
         centerTitle: false,
         title: const Text('일기'),
       ),
-      body: PostListBody(),
+      body: const PostListBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PostAddScreen(),
+              builder: (context) => const PostAddScreen(),
               fullscreenDialog: true,
             ),
           );

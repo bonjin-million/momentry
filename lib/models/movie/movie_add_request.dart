@@ -1,24 +1,26 @@
 class MovieAddRequest {
-  final String title;
-  final int movieId;
-  final String image;
-  final List<dynamic> stars;
-  final String actors;
-  final String directors;
-  final String prodYear;
-  final String content;
-  final String date;
+  String? title;
+  int? movieId;
+  String? image;
+  List<dynamic>? stars;
+  String? actors;
+  String? directors;
+  String? prodYear;
+  String? content;
+  String? date;
+  String? type;
 
   MovieAddRequest(
-      {required this.title,
-      required this.movieId,
-      required this.image,
-      required this.stars,
-      required this.directors,
-      required this.actors,
-      required this.prodYear,
-      required this.content,
-      required this.date});
+      {this.title,
+      this.movieId,
+      this.image,
+      this.stars,
+      this.directors,
+      this.actors,
+      this.prodYear,
+      this.content,
+      this.type,
+      this.date});
 
   MovieAddRequest.fromJson(Map<String, dynamic> json)
       : title = json['title'],
@@ -29,6 +31,7 @@ class MovieAddRequest {
         prodYear = json['prodYear'],
         directors = json['directors'],
         stars = json['stars'],
+        type = json['type'],
         image = json['image'];
 
   Map<String, dynamic> toJson() {
@@ -41,18 +44,21 @@ class MovieAddRequest {
       'prodYear': prodYear,
       'actors': actors,
       'content': content,
-      'date': date
+      'date': date,
+      'type': type
     };
   }
 
   Map<String, dynamic> toMap() => {
         'title': title,
         'image': image,
+        'movieId': movieId,
         'stars': stars.toString(),
         'directors': directors,
         'prodYear': prodYear,
         'actors': actors,
         'content': content,
         'date': date,
+        'type': type
       };
 }

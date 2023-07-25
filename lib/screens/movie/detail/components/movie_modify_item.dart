@@ -80,7 +80,7 @@ class _MovieModifyItemState extends ConsumerState<MovieModifyItem> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                MovieAddScreen(detailItem: item),
+                                MovieAddScreen(item: item, type: 'MODIFY'),
                             fullscreenDialog: true,
                           ),
                         );

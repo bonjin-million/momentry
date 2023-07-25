@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momentry/models/movie/movie_detail.dart';
@@ -57,10 +59,12 @@ class _BookDetailBodyState extends ConsumerState<MovieDetailBody> {
             ),
             child: AspectRatio(
               aspectRatio: 3 / 4,
-              child: Image.network(
-                item.image,
-                fit: BoxFit.contain,
-              ),
+              child: item.type == 'FILE'
+                  ? Image.memory(base64Decode(item.image), fit: BoxFit.contain)
+                  : Image.network(
+                      item.image,
+                      fit: BoxFit.contain,
+                    ),
             ),
           ),
           Padding(

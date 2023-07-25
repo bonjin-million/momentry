@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:googleapis/drive/v3.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CustomImage extends StatelessWidget {
   final String imageUrl;
@@ -15,16 +17,18 @@ class CustomImage extends StatelessWidget {
     return Image.network(
       imageUrl,
       fit: BoxFit.cover,
-      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) return child;
         return const Center(
           child: AspectRatio(
-            aspectRatio: 1/1,
+            aspectRatio: 1 / 1,
             child: CircularProgressIndicator(),
           ),
         );
       },
-      errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+      errorBuilder:
+          (BuildContext context, Object error, StackTrace? stackTrace) {
         return Image.asset('assets/images/no-image.png');
       },
     );
