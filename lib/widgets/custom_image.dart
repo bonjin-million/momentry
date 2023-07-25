@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:googleapis/drive/v3.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CustomImage extends StatelessWidget {
   final String imageUrl;

@@ -323,7 +323,7 @@ class _MovieAddBodyState extends ConsumerState<MovieAddBody> {
                           padding: const EdgeInsets.fromLTRB(40, 0, 40, 10),
                           child: title!.isNotEmpty
                               ? Text(
-                                  title ?? '',
+                                  title,
                                   style: const TextStyle(
                                     fontSize: 18,
                                   ),
@@ -415,7 +415,7 @@ class _MovieAddBodyState extends ConsumerState<MovieAddBody> {
                                     Expanded(
                                       child: directors!.isNotEmpty
                                           ? Text(
-                                              directors ?? '',
+                                              directors,
                                               textAlign: TextAlign.center,
                                             )
                                           : TextFormField(
@@ -455,7 +455,7 @@ class _MovieAddBodyState extends ConsumerState<MovieAddBody> {
                                     Expanded(
                                       child: actors!.isNotEmpty
                                           ? Text(
-                                              actors ?? '',
+                                              actors,
                                               textAlign: TextAlign.left,
                                             )
                                           : TextFormField(

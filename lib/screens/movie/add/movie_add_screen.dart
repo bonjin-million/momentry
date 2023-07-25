@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:momentry/models/movie/movie.dart';
 import 'package:momentry/models/movie/movie_detail.dart';
 import 'package:momentry/screens/movie/add/components/movie_add_body.dart';
 
